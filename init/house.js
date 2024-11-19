@@ -14,3 +14,4 @@ let housingData = [
 ]
 
 module.exports = housingData
+

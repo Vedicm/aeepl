@@ -18,13 +18,15 @@ const annualData = require("./annualMaintainence.js");
 const Annual = require("../models/annual.js");
 const Service = require("../models/service.js");
 const serviceData = require("./Service.js");
+const dbUrl = process.env.DBURL;
+
 
 main()
 .then(res=>console.log("Connection Successful"))
 .catch(err=>console.log(err))
 
 async function main(){
-   await mongoose.connect(Mongo_URL);
+   await mongoose.connect(dbUrl);
 }
 
 // const initDB = async () => {
