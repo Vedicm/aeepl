@@ -1,0 +1,197 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  .table {
+    border-radius: 1.1rem;
+    overflow: hidden; 
+  }
+</style>
+
+<div class="project-div">
+  <h4 class="text-center mt-4">LIST OF PROJECTS EXECUTED</h4>
+  <table class="table table-primary mt-4 text-center">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Name OF CLIENTS</th>
+        <th scope="col">LOCATION</th>
+        <th scope="col">TYPE OF PROJECTS</th>
+        <th scope="col">CAPACITY</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% projectList.forEach((project, index) => { %>
+      <tr>
+        <th scope="row"><%= index + 1 %>.</th>
+        <!-- Dynamically display the row number -->
+        <td><%= project.biological_treatment %></td>
+        <td><%= project.location %></td>
+        <td><%= project.type_of_project %></td>
+        <td><%= project.capacity %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h4 class="text-center mt-4">HOUSING AND HOTEL INDUSTRIES</h4>
+  <table class="table table-primary mt-4 text-center">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Name OF CLIENTS</th>
+        <th scope="col">LOCATION</th>
+        <th scope="col">TYPE OF PROJECTS</th>
+        <th scope="col">CAPACITY</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% houseList.forEach((house, index) => { %>
+      <tr>
+        <th scope="row"><%= index + 1 %>.</th>
+        <!-- Dynamically display the row number -->
+        <td><%= house.biological_treatment %></td>
+        <td><%= house.location %></td>
+        <td><%= house.type_of_project %></td>
+        <td><%= house.capacity %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h4 class="text-center mt-4">Electroplating INDUSTRIES</h4>
+  <table class="table table-primary mt-4 text-center">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Name OF CLIENTS</th>
+        <th scope="col">LOCATION</th>
+        <th scope="col">TYPE OF PROJECTS</th>
+        <th scope="col">CAPACITY</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% electroplatesList.forEach((electroplates, index) => { %>
+      <tr>
+        <th scope="row"><%= index + 1 %>.</th>
+        <!-- Dynamically display the row number -->
+        <td><%= electroplates.biological_treatment %></td>
+        <td><%= electroplates.location %></td>
+        <td><%= electroplates.type_of_project %></td>
+        <td><%= electroplates.capacity %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h4 class="text-center mt-4">PAINTSHOP & PHOSPHATING INDUSTRIES</h4>
+  <table class="table table-primary mt-4 text-center">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Name OF CLIENTS</th>
+        <th scope="col">LOCATION</th>
+        <th scope="col">TYPE OF PROJECTS</th>
+        <th scope="col">CAPACITY</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% paintList.forEach((paint, index) => { %>
+      <tr>
+        <th scope="row"><%= index + 1 %>.</th>
+        <!-- Dynamically display the row number -->
+        <td><%= paint.biological_treatment %></td>
+        <td><%= paint.location %></td>
+        <td><%= paint.type_of_project %></td>
+        <td><%= paint.capacity %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h4 class="text-center mt-4">COOLANT AND CUTTING OIL</h4>
+  <table class="table table-primary mt-4 text-center">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Name OF CLIENTS</th>
+        <th scope="col">LOCATION</th>
+        <th scope="col">TYPE OF PROJECTS</th>
+        <th scope="col">CAPACITY</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% coolentList.forEach((coolent, index) => { %>
+      <tr>
+        <th scope="row"><%= index + 1 %>.</th>
+        <!-- Dynamically display the row number -->
+        <td><%= coolent.biological_treatment %></td>
+        <td><%= coolent.location %></td>
+        <td><%= coolent.type_of_project %></td>
+        <td><%= coolent.capacity %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h4 class="text-center mt-4">WASTEWATER RECYCLING SYSTEM</h4>
+  <table class="table table-primary mt-4 text-center">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Name OF CLIENTS</th>
+        <th scope="col">LOCATION</th>
+        <th scope="col">TYPE OF PROJECTS</th>
+        <th scope="col">CAPACITY</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% wasteWaterList.forEach((wasteWater, index) => { %>
+      <tr>
+        <th scope="row"><%= index + 1 %>.</th>
+        <!-- Dynamically display the row number -->
+        <td><%= wasteWater.biological_treatment %></td>
+        <td><%= wasteWater.location %></td>
+        <td><%= wasteWater.type_of_project %></td>
+        <td><%= wasteWater.capacity %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h4 class="text-center mt-4">ANNUAL MAINTENANCE CONTRACT</h4>
+  <table class="table table-primary mt-4 text-center">
+    <thead>
+      <tr>
+        <th scope="col">S.No.</th>
+        <th scope="col">Name OF CLIENTS</th>
+        <th scope="col">LOCATION</th>
+        <th scope="col">TYPE OF PROJECTS</th>
+        <th scope="col">CAPACITY</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% annualList.forEach((annual, index) => { %>
+      <tr>
+        <th scope="row"><%= index + 1 %>.</th>
+        <!-- Dynamically display the row number -->
+        <td><%= annual.biological_treatment %></td>
+        <td><%= annual.location %></td>
+        <td><%= annual.type_of_project %></td>
+        <td><%= annual.capacity %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

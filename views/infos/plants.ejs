@@ -1,0 +1,753 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
+  /* This pen */
+  body {
+    /* font-family: "Baloo 2", cursive; */
+    /* font-size: 16px; */
+    color: #ffffff;
+    /* text-rendering: optimizeLegibility;  */
+    /* font-weight: initial; */
+  }
+
+  .dark {
+    background: #110f16;
+  }
+
+  .light {
+    background: #f3f5f7;
+  }
+
+  a,
+  a:hover {
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+
+  #pageHeaderTitle {
+    margin: 2rem 0;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2.5rem;
+  }
+
+  /* Cards */
+  .postcard {
+    flex-wrap: wrap;
+    display: flex;
+    box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
+    border-radius: 10px;
+    margin: 0 0 2rem 0;
+    overflow: hidden;
+    position: relative;
+    color: #ffffff;
+  }
+  .postcard.dark {
+    background-color: #18151f;
+  }
+  .postcard.light {
+    background-color: #e1e5ea;
+  }
+  .postcard .t-dark {
+    color: #18151f;
+  }
+  .postcard a {
+    color: inherit;
+  }
+  .postcard h1,
+  .postcard .h1 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .postcard .small {
+    font-size: 80%;
+  }
+  .postcard .postcard__title {
+    font-size: 1.75rem;
+  }
+  .postcard .postcard__img {
+    max-height: 180px;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+  }
+  .postcard .postcard__img_link {
+    display: contents;
+  }
+  .postcard .postcard__bar {
+    width: 50px;
+    height: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #424242;
+    transition: width 0.2s ease;
+  }
+  .postcard .postcard__text {
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .postcard .postcard__preview-txt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: justify;
+    height: 100%;
+  }
+  .postcard .postcard__tagbox {
+    display: flex;
+    flex-flow: row wrap;
+    font-size: 14px;
+    margin: 20px 0 0 0;
+    padding: 0;
+    justify-content: center;
+  }
+  .postcard .postcard__tagbox .tag__item {
+    display: inline-block;
+    background: rgba(83, 83, 83, 0.4);
+    border-radius: 3px;
+    padding: 2.5px 10px;
+    margin: 0 5px 5px 0;
+    cursor: default;
+    user-select: none;
+    transition: background-color 0.3s;
+  }
+  .postcard .postcard__tagbox .tag__item:hover {
+    background: rgba(83, 83, 83, 0.8);
+  }
+  .postcard:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(-70deg, #424242, transparent 50%);
+    opacity: 1;
+    border-radius: 10px;
+  }
+  .postcard:hover .postcard__bar {
+    width: 100px;
+  }
+
+  @media screen and (min-width: 769px) {
+    .postcard {
+      flex-wrap: inherit;
+    }
+    .postcard .postcard__title {
+      font-size: 2rem;
+    }
+    .postcard .postcard__tagbox {
+      justify-content: start;
+    }
+    .postcard .postcard__img {
+      max-width: 300px;
+      max-height: 100%;
+      transition: transform 0.3s ease;
+    }
+    .postcard .postcard__text {
+      padding: 3rem;
+      width: 100%;
+    }
+    .postcard .media.postcard__text:before {
+      content: "";
+      position: absolute;
+      display: block;
+      background: #18151f;
+      top: -20%;
+      height: 130%;
+      width: 55px;
+    }
+    .postcard:hover .postcard__img {
+      transform: scale(1.1);
+    }
+    .postcard:nth-child(2n + 1) {
+      flex-direction: row;
+    }
+    .postcard:nth-child(2n + 0) {
+      flex-direction: row-reverse;
+    }
+    .postcard:nth-child(2n + 1) .postcard__text::before {
+      left: -12px !important;
+      transform: rotate(4deg);
+    }
+    .postcard:nth-child(2n + 0) .postcard__text::before {
+      right: -12px !important;
+      transform: rotate(-4deg);
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .postcard__text {
+      padding: 2rem 3.5rem;
+    }
+    .postcard__text:before {
+      content: "";
+      position: absolute;
+      display: block;
+      top: -20%;
+      height: 130%;
+      width: 55px;
+    }
+    .postcard.dark .postcard__text:before {
+      background: #18151f;
+    }
+    .postcard.light .postcard__text:before {
+      background: #e1e5ea;
+    }
+  }
+  /* COLORS */
+  .postcard .postcard__tagbox .green.play:hover {
+    background: #79dd09;
+    color: black;
+  }
+
+  .green .postcard__title:hover {
+    color: #79dd09;
+  }
+
+  .green .postcard__bar {
+    background-color: #79dd09;
+  }
+
+  .green::before {
+    background-image: linear-gradient(
+      -30deg,
+      rgba(121, 221, 9, 0.1),
+      transparent 50%
+    );
+  }
+
+  .green:nth-child(2n)::before {
+    background-image: linear-gradient(
+      30deg,
+      rgba(121, 221, 9, 0.1),
+      transparent 50%
+    );
+  }
+
+  .postcard .postcard__tagbox .blue.play:hover {
+    background: #0076bd;
+  }
+
+  .blue .postcard__title:hover {
+    color: #0076bd;
+  }
+
+  .blue .postcard__bar {
+    background-color: #0076bd;
+  }
+
+  .blue::before {
+    background-image: linear-gradient(
+      -30deg,
+      rgba(0, 118, 189, 0.1),
+      transparent 50%
+    );
+  }
+
+  .blue:nth-child(2n)::before {
+    background-image: linear-gradient(
+      30deg,
+      rgba(0, 118, 189, 0.1),
+      transparent 50%
+    );
+  }
+
+  .postcard .postcard__tagbox .red.play:hover {
+    background: #bd150b;
+  }
+
+  .red .postcard__title:hover {
+    color: #bd150b;
+  }
+
+  .red .postcard__bar {
+    background-color: #bd150b;
+  }
+
+  .red::before {
+    background-image: linear-gradient(
+      -30deg,
+      rgba(189, 21, 11, 0.1),
+      transparent 50%
+    );
+  }
+
+  .red:nth-child(2n)::before {
+    background-image: linear-gradient(
+      30deg,
+      rgba(189, 21, 11, 0.1),
+      transparent 50%
+    );
+  }
+
+  .postcard .postcard__tagbox .yellow.play:hover {
+    background: #bdbb49;
+    color: black;
+  }
+
+  .yellow .postcard__title:hover {
+    color: #bdbb49;
+  }
+
+  .yellow .postcard__bar {
+    background-color: #bdbb49;
+  }
+
+  .yellow::before {
+    background-image: linear-gradient(
+      -30deg,
+      rgba(189, 187, 73, 0.1),
+      transparent 50%
+    );
+  }
+
+  .yellow:nth-child(2n)::before {
+    background-image: linear-gradient(
+      30deg,
+      rgba(189, 187, 73, 0.1),
+      transparent 50%
+    );
+  }
+
+  @media screen and (min-width: 769px) {
+    .green::before {
+      background-image: linear-gradient(
+        -80deg,
+        rgba(121, 221, 9, 0.1),
+        transparent 50%
+      );
+    }
+    .green:nth-child(2n)::before {
+      background-image: linear-gradient(
+        80deg,
+        rgba(121, 221, 9, 0.1),
+        transparent 50%
+      );
+    }
+    .blue::before {
+      background-image: linear-gradient(
+        -80deg,
+        rgba(0, 118, 189, 0.1),
+        transparent 50%
+      );
+    }
+    .blue:nth-child(2n)::before {
+      background-image: linear-gradient(
+        80deg,
+        rgba(0, 118, 189, 0.1),
+        transparent 50%
+      );
+    }
+    .red::before {
+      background-image: linear-gradient(
+        -80deg,
+        rgba(189, 21, 11, 0.1),
+        transparent 50%
+      );
+    }
+    .red:nth-child(2n)::before {
+      background-image: linear-gradient(
+        80deg,
+        rgba(189, 21, 11, 0.1),
+        transparent 50%
+      );
+    }
+    .yellow::before {
+      background-image: linear-gradient(
+        -80deg,
+        rgba(189, 187, 73, 0.1),
+        transparent 50%
+      );
+    }
+    .yellow:nth-child(2n)::before {
+      background-image: linear-gradient(
+        80deg,
+        rgba(189, 187, 73, 0.1),
+        transparent 50%
+      );
+    }
+  }
+
+  /*# sourceMappingURL=style.css.map */
+</style>
+
+<body class="plant-div">
+  <section class="light">
+    <div class="container py-2">
+      <div class="h1 text-center text-dark" id="pageHeaderTitle">
+        Our Plants...
+      </div>
+
+      <article class="postcard light blue">
+        <a class="postcard__img_link" href="#">
+          <img
+            class="postcard__img"
+            src="https://c1.wallpaperflare.com/preview/246/495/714/treatment-plant-wastewater-refinery-aerial-photo-the-height-of-the.jpg"
+            alt="Image Title"
+          />
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title blue">
+            <a href="#">Municipal Sewage Treatment Plants</a>
+          </h1>
+          <div class="postcard__subtitle small">
+            <!-- <time datetime="2020-05-25 12:00:00">
+                          <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+                      </time> -->
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">
+            At municipal wastewater treatment plants, raw municipal wastewater
+            undergoes preliminary, primary, secondary, and in some cases,
+            additional treatment to yield treated effluent and a concentrated
+            streams of solid in liquid, called sludge. The sludge is treated as
+            required for utilization or disposal, and additional treatment of
+            effluent may be needed to accommodate specific water reuse
+            opportunities.
+          </div>
+          <ul class="postcard__tagbox">
+            <!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+                      <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                      <li class="tag__item play blue">
+                          <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+                      </li> -->
+          </ul>
+        </div>
+      </article>
+      <article class="postcard light red">
+        <a class="postcard__img_link" href="#">
+          <img
+            class="postcard__img"
+            src="https://d3pcsg2wjq9izr.cloudfront.net/files/116125/products/918219/116125_2_20221218143251763224_raw.jpg"
+            alt="Image Title"
+          />
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title red">
+            <a href="#">Portable Sewage Treatment Plants</a>
+          </h1>
+          <div class="postcard__subtitle small">
+            <!-- <time datetime="2020-05-25 12:00:00">
+                          <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+                      </time> -->
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">
+            Under this series the sewage treatment plants are available from
+            1000 ltrs to 100,000 ltrs.. It is a compact, modular, frp coated ms
+            tank which can be easily used in a decentralized manner anywhere for
+            sewage treatment of Domestic and commercial places.
+          </div>
+          <ul class="postcard__tagbox">
+            <!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+                      <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                      <li class="tag__item play red">
+                          <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+                      </li> -->
+          </ul>
+        </div>
+      </article>
+      <article class="postcard light blue">
+        <a class="postcard__img_link" href="#">
+          <img
+            class="postcard__img"
+            src="https://www.waterworksengineers.com/wp-content/uploads/2019/10/20171121_110202-EFFECTS-1520x855.jpg"
+            alt="Image Title"
+          />
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title blue">
+            <a href="#">Effluent Treatment Plants</a>
+          </h1>
+          <div class="postcard__subtitle small">
+            <!-- <time datetime="2020-05-25 12:00:00">
+                            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+                        </time> -->
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">
+            ETP (Effluent Treatment Plants) is a process design for treating the
+            industrial waste water for its reuse or safe disposal to the
+            environment. It’s a crucial system used by industries and factories
+            to clean their wastewater before it is discharged into the
+            environment. This cleansing process ensures the wastewater meets the
+            standards set by environmental authorities.
+          </div>
+          <ul class="postcard__tagbox">
+            <!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+                        <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                        <li class="tag__item play blue">
+                            <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+                        </li> -->
+          </ul>
+        </div>
+      </article>
+      <article class="postcard light blue">
+        <a class="postcard__img_link" href="#">
+          <img
+            class="postcard__img"
+            src="https://5.imimg.com/data5/IB/LK/UW/SELLER-769209/water-tertiary-treatment-plant-1000x1000.jpg"
+            alt="Image Title"
+          />
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title blue">
+            <a href="#">Tertiary Treatment Plants</a>
+          </h1>
+          <div class="postcard__subtitle small">
+            <!-- <time datetime="2020-05-25 12:00:00">
+                          <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+                      </time> -->
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">
+            Tertiary treatment of effluent involves a series of additional steps
+            after secondary treatment to further reduce organics, turbidity,
+            nitrogen, phosphorus, metals and pathogens. Most processes involve
+            some type of physiochemical treatment such as coagulation,
+            filteration, activated carbon adsorption of organics, reverse
+            osmosis and additional disinfection. Tertiary treatment of
+            wastewater is practiced for additional protection of wildlife after
+            discharge into rever or lakes. Even more commonly, It is performed
+            when the wastewater is to be reused for irrigation (e.g., lakes,
+            estuaries) or for drinking water.
+          </div>
+          <ul class="postcard__tagbox">
+            <!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+                      <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                      <li class="tag__item play blue">
+                          <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+                      </li> -->
+          </ul>
+        </div>
+      </article>
+      <article class="postcard light yellow">
+        <a class="postcard__img_link" href="#">
+          <img
+            class="postcard__img"
+            src="https://www.wsd.gov.hk/filemanager/en/content_1195/fresh-water-supply-system.jpg"
+            alt="Image Title"
+          />
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title yellow">
+            <a href="#">Water Distribution</a>
+          </h1>
+          <div class="postcard__subtitle small">
+            <!-- <time datetime="2020-05-25 12:00:00">
+                            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+                        </time> -->
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">
+            Water Distribution Systems The Purpose of distribution system is to
+            deliver water to consumer with appropriate quality, quantity and
+            pressure. Distribution System is used to describe collectively the
+            facilities used to supply water from its source to the point of
+            usage.
+          </div>
+          <ul class="postcard__tagbox">
+            <!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+                        <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                        <li class="tag__item play yellow">
+                            <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+                        </li> -->
+          </ul>
+        </div>
+      </article>
+      <article class="postcard light green">
+        <a class="postcard__img_link" href="#">
+          <img
+            class="postcard__img"
+            src="https://5.imimg.com/data5/SELLER/Default/2023/6/312641709/RT/FF/KH/152784373/stainless-steel-automatic-1000-lph-reverse-osmosis-plant-500x500.jpg"
+            alt="Image Title"
+          />
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title green">
+            <a href="#">Reverse Osmosis Plants</a>
+          </h1>
+          <div class="postcard__subtitle small">
+            <!-- <time datetime="2020-05-25 12:00:00">
+                            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+                        </time> -->
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">
+            Reverse Osmosis water purification process is a simple and striaght
+            forward water filteration process. It is accomplished by water
+            pressure pushing tap water through a semipermeable membrane to
+            remove impurities from water. This is a process in which dissolved
+            inorganic solids (such as salts) or removed from a solution(such as
+            water). Reverse Osmosis (RO) is a water treatment process that
+            removes contaminants from water by using pressure to force water
+            molecules through a semipermeable membrane. During this process, the
+            contaminants are filteredout and flushed away, leaving clean,
+            delicious drinking water. Reverse Osmosis is a capable of removing
+            upto 99 percent of 65 different contaminants (see partial list
+            below), including lead, fluoride, chlorine, dissolved salts, and
+            more.
+          </div>
+          <ul class="postcard__tagbox">
+            <!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+                        <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                        <li class="tag__item play green">
+                            <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+                        </li> -->
+          </ul>
+        </div>
+      </article>
+      <article class="postcard light red">
+        <a class="postcard__img_link" href="#">
+          <img
+            class="postcard__img"
+            src="https://ecoprotection.in/wp-content/uploads/2020/09/3.NPCIlindus.jpeg"
+            alt="Image Title"
+          />
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title red">
+            <a href="#">Wastewater Recycling Plants</a>
+          </h1>
+          <div class="postcard__subtitle small">
+            <!-- <time datetime="2020-05-25 12:00:00">
+                            <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+                        </time> -->
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">
+            Water recycling is using treated wastewater for beneficial purposes
+            such as agricultural and landscape irrigation, industrial processes,
+            toilet flushing, and replenishing a ground water basin (referred to
+            as ground water recharge). Water recycling offers resource and
+            financial savings. Wastewater treatment can be tailored to meet the
+            water quality requirments of a planned reuse. The Principal of
+            operation of ETP is Physio-Chemical treatment followed by polishing
+            Treatments like - Sand Filteration, Activated Charcoal treatment
+            (Adsorption), Ozonation (Chemical Oxidation), Ultra Filtration (UF),
+            Reverse Osmosis (RO) and evaporation (if required).
+          </div>
+          <ul class="postcard__tagbox">
+            <!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+                        <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                        <li class="tag__item play red">
+                            <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+                        </li> -->
+          </ul>
+        </div>
+      </article>
+      <article class="postcard light green">
+        <a class="postcard__img_link" href="#">
+          <img
+            class="postcard__img"
+            src="https://e0.pxfuel.com/wallpapers/149/46/desktop-wallpaper-water-treatment-plant.jpg"
+            alt="Image Title"
+          />
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title green">
+            <a href="#">Water Treatment Plants</a>
+          </h1>
+          <div class="postcard__subtitle small">
+            <!-- <time datetime="2020-05-25 12:00:00">
+                          <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+                      </time> -->
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">
+            The raw water treatment plant is designed principally for solids
+            removal from the incoming raw water, backwash water and wastewater
+            from the oily water collection system. Raw water enters a
+            coagulation/flocculation chamber followed by a clarifier and dual
+            media depths filters. Backwash water from the filters is
+            periodically returned to the clarifier. Clarifier sludged is dosed
+            with polymer before being thickened and then sent to the
+            filter-press for dewatering. The cake is sent to landfill and the
+            recovered water returned to the clarifier.
+          </div>
+          <ul class="postcard__tagbox">
+            <!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+                      <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                      <li class="tag__item play green">
+                          <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+                      </li> -->
+          </ul>
+        </div>
+      </article>
+      <article class="postcard light red">
+        <a class="postcard__img_link" href="#">
+          <img
+            class="postcard__img"
+            src="https://radiantchemical.com/wp-content/uploads/2020/10/Ultrafiltration-Plant.jpg"
+            alt="Image Title"
+          />
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title red">
+            <a href="#">Ultrafiltration Plants</a>
+          </h1>
+          <div class="postcard__subtitle small">
+            <!-- <time datetime="2020-05-25 12:00:00">
+                          <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+                      </time> -->
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">
+            Ultrafiltration (UF) is a membrane filteraion process similar to
+            Reverse Osmosis, using hydrostatic pressure to force water through
+            asemi-permeable membrane. The pore size of the ultrafiltration
+            membrane is usually 103-106 Daltons. Ultrafiltration (UF) is a
+            pressure-driven barrier to suspended solids, bacteria, viruses,
+            endotoxins and other pathogens to produce water with high purity and
+            low silt density.
+          </div>
+          <ul class="postcard__tagbox">
+            <!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+                      <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                      <li class="tag__item play red">
+                          <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+                      </li> -->
+          </ul>
+        </div>
+      </article>
+      <article class="postcard light yellow">
+        <a class="postcard__img_link" href="#">
+          <img
+            class="postcard__img"
+            src="http://ftsh2o.com/wp-content/uploads/2018/03/ZLD-Process-Diagram-1.png"
+            alt="Image Title"
+          />
+        </a>
+        <div class="postcard__text t-dark">
+          <h1 class="postcard__title yellow">
+            <a href="#">Zero Liquid Discharge Plants</a>
+          </h1>
+          <div class="postcard__subtitle small">
+            <!-- <time datetime="2020-05-25 12:00:00">
+                          <i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+                      </time> -->
+          </div>
+          <div class="postcard__bar"></div>
+          <div class="postcard__preview-txt">
+            Zero-liquid discharge (ZLD) is a water treatment process in which
+            all wastewater is purified and recycled; therefore, leaving zero
+            discharge at the end of the treatment cycle. Zero liquid discharge
+            is an advanced wastewater treatment method that includes
+            ultrafiltration, reverse osmosis, evaporation/crystallization, and
+            fractional electrodeionization.
+          </div>
+          <ul class="postcard__tagbox">
+            <!-- <li class="tag__item"><i class="fas fa-tag mr-2"></i>Podcast</li>
+                      <li class="tag__item"><i class="fas fa-clock mr-2"></i>55 mins.</li>
+                      <li class="tag__item play yellow">
+                          <a href="#"><i class="fas fa-play mr-2"></i>Play Episode</a>
+                      </li> -->
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+</body>
