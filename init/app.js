@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Mongo_URL = "mongodb://127.0.0.1:27017/aeepl";
@@ -26,7 +28,8 @@ main()
 .catch(err=>console.log(err))
 
 async function main(){
-   await mongoose.connect(dbUrl);
+   const mongoUri = process.env.MONGO_URI;
+   await mongoose.connect(mongoUri);
 }
 
 // const initDB = async () => {
